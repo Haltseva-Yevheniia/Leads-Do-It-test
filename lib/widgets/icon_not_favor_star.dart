@@ -22,7 +22,7 @@ class IconNotFavoriteStar extends StatelessWidget {
         child: SvgPicture.asset(
           'asset/icons/Vector.svg',
           colorFilter:
-              ColorFilter.mode(Palette.textPlaceholder, BlendMode.srcIn),
+              const ColorFilter.mode(Palette.textPlaceholder, BlendMode.srcIn),
         ),
       ),
     );

@@ -21,10 +21,7 @@ class SearchCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Palette.layer1
-        ) ,
-
+            borderRadius: BorderRadius.circular(10.0), color: Palette.layer1),
         child: ListTile(
           title: Text(
             name,

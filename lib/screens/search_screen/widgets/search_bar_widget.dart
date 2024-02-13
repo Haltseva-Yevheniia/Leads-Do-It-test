@@ -7,6 +7,7 @@ import 'package:lead_do_it_test/style/palette.dart';
 
 class SearchBarWidget extends StatefulWidget {
   final Widget trailing;
+
   const SearchBarWidget({super.key, this.trailing = const SizedBox.shrink()});
 
   @override
@@ -17,12 +18,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
-    final FocusNode _focusNode = FocusNode();
+    final FocusNode focusNode = FocusNode();
     //bool isEnable = false;
 
     return GestureDetector(
       onTap: () {
-        _focusNode.unfocus();
+        focusNode.unfocus();
       },
       child: TextField(
         controller: searchController,
@@ -33,7 +34,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               .add(ReposFetchedEvent(name: searchController.text));
           searchController.clear();
         },
-        focusNode: _focusNode,
+        focusNode: focusNode,
         // onTap: (){
         //     context.read<SearchScreenBloc>().add(ReposFetchedEvent(name: searchController.text));
         //     searchController.clear();
@@ -49,7 +50,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               width: 24,
             ),
           ),
-          suffixIcon: widget.trailing,
+          suffix: widget.trailing,
           hintText: hintText,
           hintStyle: const TextStyle(color: Palette.textPlaceholder),
           //hintStyle: bodyStyle,

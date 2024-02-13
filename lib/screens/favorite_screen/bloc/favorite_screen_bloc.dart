@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:lead_do_it_test/local_data_base/favorite_repos_model.dart';
-import 'package:lead_do_it_test/models/repository_model.dart';
 
 import '../../../local_data_base/data_base_service.dart';
 
@@ -35,11 +34,17 @@ class FavoriteScreenBloc
     final isFavourite = await _localFavoriteDataBase.isReposFavorite(event.id);
     if (isFavourite) {
       await _localFavoriteDataBase.removeRepos(event.id);
-     // emit();
+      final fetchFavouriteRepos =
+          await _localFavoriteDataBase.fetchFavoriteRepos();
+      emit(FavoriteScreenSuccess(
+          favoriteRepos: fetchFavouriteRepos, isFavorite: false));
     } else {
       await _localFavoriteDataBase.addFavoriteRepos(
           id: event.id, name: event.name);
-     // emit(state.copyWith(isFavoriteRepos: true));
+      final fetchFavouriteRepos =
+          await _localFavoriteDataBase.fetchFavoriteRepos();
+      emit(FavoriteScreenSuccess(
+          favoriteRepos: fetchFavouriteRepos, isFavorite: true));
     }
   }
 }

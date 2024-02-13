@@ -43,7 +43,7 @@ class _LoadingScreenViewState extends State<LoadingScreenView> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Search App', style: FontStyles.headerMain),
+            Text('Search App', style: FontStyles.headerMainWhite),
             SizedBox(
               height: 16,
             ),

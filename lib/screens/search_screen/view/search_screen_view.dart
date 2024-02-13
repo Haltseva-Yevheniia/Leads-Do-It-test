@@ -4,7 +4,6 @@ import 'package:lead_do_it_test/screens/favorite_screen/view/favorite_screen_vie
 import 'package:lead_do_it_test/screens/search_screen/bloc/search_screen_bloc.dart';
 import 'package:lead_do_it_test/screens/search_screen/view/search_screen.dart';
 import 'package:lead_do_it_test/style/font_styles.dart';
-import 'package:lead_do_it_test/widgets/icon_star.dart';
 
 import '../../../constants.dart';
 import '../../../widgets/icon_favorite_list.dart';

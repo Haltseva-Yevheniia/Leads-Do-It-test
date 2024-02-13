@@ -19,8 +19,9 @@ class IconStar extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: SvgPicture.asset('asset/icons/Vector.svg',  colorFilter:
-    ColorFilter.mode(Palette.accentPrimary, BlendMode.srcIn)),
+        child: SvgPicture.asset('asset/icons/Vector.svg',
+            colorFilter:
+                const ColorFilter.mode(Palette.accentPrimary, BlendMode.srcIn)),
       ),
     );
   }

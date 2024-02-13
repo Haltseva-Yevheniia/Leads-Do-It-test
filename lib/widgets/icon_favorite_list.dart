@@ -19,7 +19,9 @@ class IconFavoriteList extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: SvgPicture.asset('asset/icons/Vector.svg',  ),
+        child: SvgPicture.asset(
+          'asset/icons/Vector.svg',
+        ),
       ),
     );
   }

@@ -26,159 +26,159 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchScreenBloc, SearchScreenState>(
         builder: (context, state) {
-          if (state.status == SearchScreenStatus.initialHistory) {
-            return Column(
-              children: [
-                const Divider(height: 1, thickness: 1, color: Palette.layer1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SearchBarWidget(),
-                      ),
-                      Text(
-                        searchHistory,
-                        textAlign: TextAlign.left,
-                        style: FontStyles.headerMain,
-                      ),
-                    ],
+      if (state.status == SearchScreenStatus.initialHistory) {
+        return Column(
+          children: [
+            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SearchBarWidget(),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    child: state.isHistoryEmpty
-                        ? Center(
-                      child: Text(
-                        emptyHistory,
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                        : ListView.builder(
+                  Text(
+                    searchHistory,
+                    textAlign: TextAlign.left,
+                    style: FontStyles.headerMainAccent,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: state.isHistoryEmpty
+                    ? Center(
+                        child: Text(
+                          emptyHistory,
+                          style: FontStyles.bodyPlaceHolder,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : ListView.builder(
                         itemCount: state.searchHistory.length,
                         itemBuilder: (context, index) {
                           return SearchCard(
                             name: state.searchHistory[index],
                           );
                         }),
-                  ),
-                )
-              ],
-            );
-          }
-          if (state.status == SearchScreenStatus.loading) {
-            return Column(children: [
-              Divider(height: 1, thickness: 1, color: Palette.layer1),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: SearchBarWidget(
-                          trailing: Padding(padding: EdgeInsets.all(10.0),
-                            child: SvgPicture.asset('asset/icons/Close.svg'),),
-                          ),
-                    ),
-                  ],
-                ),
               ),
-              SizedBox(
-                height: 24,
-              ),
-              Center(
-                child: CupertinoActivityIndicator(
-                  radius: 22,
-                  color: Palette.spinner,
-                ),
-              ),
-            ]);
-          }
-          if (state.status == SearchScreenStatus.success) {
-            return Column(
+            )
+          ],
+        );
+      }
+      if (state.status == SearchScreenStatus.loading) {
+        return Column(children: [
+          const Divider(height: 1, thickness: 1, color: Palette.layer1),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Divider(height: 1, thickness: 1, color: Palette.layer1),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SearchBarWidget(),
-                      ),
-                      Text(searchResultHeader),
-                    ],
+                  padding: const EdgeInsets.all(8.0),
+                  child: SearchBarWidget(
+                    trailing: SvgPicture.asset('asset/icons/Close.svg'),
                   ),
                 ),
-                Expanded(
-                  child: ListView.builder(
-                      itemCount: state.repositories.length,
-                      itemBuilder: (context, index) {
-                        return SearchCard(
-                          name: state.repositories[index].name,
-                          trailing: state.isFavoriteRepos
-                              ? GestureDetector(
-                              onTap: () {
-                                context
-                                    .read<SearchScreenBloc>()
-                                    .add(ToggleFavoriteRepos(
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          const Center(
+            child: CupertinoActivityIndicator(
+              radius: 22,
+              color: Palette.spinner,
+            ),
+          ),
+        ]);
+      }
+      if (state.status == SearchScreenStatus.success) {
+        return Column(
+          children: [
+            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SearchBarWidget(
+                      trailing: SvgPicture.asset(
+                        'asset/icons/Close.svg',
+                      ),
+                    ),
+                  ),
+                  Text(
+                    searchResultHeader,
+                    style: FontStyles.headerMainAccent,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: state.repositories.length,
+                  itemBuilder: (context, index) {
+                    return SearchCard(
+                      name: state.repositories[index].name,
+                      trailing: GestureDetector(
+                          onTap: () {
+                            context
+                                .read<SearchScreenBloc>()
+                                .add(ToggleFavoriteRepos(
                                   id: state.repositories[index].id,
                                   name: state.repositories[index].name,
                                 ));
-                              },
-                              child: const IconStar())
-                              : GestureDetector(
-                              onTap: () {
-                                context.read<SearchScreenBloc>().add(
-                                    ToggleFavoriteRepos(
-                                        id: state.repositories[index].id,
-                                        name: state.repositories[index].name));
-                              },
-                              child: const IconNotFavoriteStar()),
-                        );
-                      }),
-                ),
-              ],
-            );
-          } else {
-            return Column(
-              children: [
-                const Divider(height: 1, thickness: 1, color: Palette.layer1),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: SearchBarWidget(),
-                      ),
-                      Text(
-                        emptySearchResultHeader,
-                        textAlign: TextAlign.left,
-                        style: FontStyles.headerMain,
-                      ),
-                    ],
+                          },
+                          child: state.isFavoriteRepos
+                              ? const IconStar()
+                              : const IconNotFavoriteStar()),
+                    );
+                  }),
+            ),
+          ],
+        );
+      } else {
+        return Column(
+          children: [
+            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SearchBarWidget(
+                      trailing: SvgPicture.asset('asset/icons/Close.svg'),
+                    ),
                   ),
-                ),
-                Expanded(
-                    child: Container(
-                        child: Center(
-                          child: Text(
-                            emptySearchResultBody,
-                            textAlign: TextAlign.center,
-                          ),
-                        )))
-              ],
-            );
-          }
-        });
+                  Text(
+                    emptySearchResultHeader,
+                    textAlign: TextAlign.left,
+                    style: FontStyles.headerMainAccent,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: Container(
+                    child: Center(
+              child: Text(
+                emptySearchResultBody,
+                style: FontStyles.bodyPlaceHolder,
+                textAlign: TextAlign.center,
+              ),
+            )))
+          ],
+        );
+      }
+    });
   }
 }

@@ -41,6 +41,8 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
       localSearchHistory.saveHistory();
       List<RepositoryModel> repositories =
           await serviceApi.fetchRepositories(name: event.name);
+      // List<int> currentListId = repositories.map((repos) => repos.id).toList();
+      // bool favRepos = _localFavoriteDataBase.isReposFavorite(id)
       emit(state.copyWith(
         status: SearchScreenStatus.success,
         repositories: repositories,

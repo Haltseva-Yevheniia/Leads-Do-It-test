@@ -20,7 +20,6 @@ class TestApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // serviceApi.fetchRepositories(name: 'tetris');
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoadingScreenView(),
