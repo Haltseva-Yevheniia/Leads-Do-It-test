@@ -9,19 +9,18 @@ import 'movie_observer.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DataBaseService.instance.init();
-   Bloc.observer = MovieObserver();
-  runApp( TestApp());
-
+  Bloc.observer = MovieObserver();
+  runApp(TestApp());
 }
 
 class TestApp extends StatelessWidget {
   final ServiceApi serviceApi = ServiceApi();
-   TestApp({super.key});
 
+  TestApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-   // serviceApi.fetchRepositories(name: 'tetris');
+    // serviceApi.fetchRepositories(name: 'tetris');
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoadingScreenView(),

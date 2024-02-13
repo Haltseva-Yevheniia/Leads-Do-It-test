@@ -8,6 +8,8 @@ import 'package:lead_do_it_test/widgets/search_card.dart';
 
 import '../../../constants.dart';
 import '../../../style/palette.dart';
+import '../../../widgets/icon_not_favor_star.dart';
+import '../../../widgets/icon_star.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -17,7 +19,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController searchController = TextEditingController();
+  // TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +114,24 @@ class _SearchScreenState extends State<SearchScreen> {
               child: ListView.builder(
                   itemCount: state.searchHistory.length,
                   itemBuilder: (context, index) {
-                    return SearchCard(name: state.repositories[index].name);
+                    return SearchCard(
+                      name: state.repositories[index].name,
+                      trailing: state.isFavoriteRepos
+                          ? GestureDetector(
+                              onTap: () {
+                                context.read<SearchScreenBloc>().add(
+                                    ToggleFavoriteRepos(
+                                        id: state.repositories[index].id));
+                              },
+                              child: IconStar())
+                          : GestureDetector(
+                              onTap: () {
+                                context.read<SearchScreenBloc>().add(
+                                    ToggleFavoriteRepos(
+                                        id: state.repositories[index].id));
+                              },
+                              child: const IconNotFavoriteStar()),
+                    );
                   }),
             ),
           ],

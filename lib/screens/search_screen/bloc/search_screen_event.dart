@@ -7,8 +7,6 @@ sealed class SearchScreenEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-
-
 final class SearchScreenInitialEvent extends SearchScreenEvent {}
 
 final class ReposFetchedEvent extends SearchScreenEvent {
@@ -19,5 +17,6 @@ final class ReposFetchedEvent extends SearchScreenEvent {
 
 final class ToggleFavoriteRepos extends SearchScreenEvent {
   final int id;
+
   const ToggleFavoriteRepos({required this.id});
 }

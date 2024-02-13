@@ -9,7 +9,6 @@ import 'package:lead_do_it_test/service_api/service_api.dart';
 import '../../../local_data_base/data_base_service.dart';
 
 part 'search_screen_event.dart';
-
 part 'search_screen_state.dart';
 
 class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
@@ -25,7 +24,6 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
 
   Future<void> _onGetHistory(
       SearchScreenInitialEvent event, Emitter<SearchScreenState> emit) async {
-    //emit(state.copyWith(status: SearchScreenStatus.loading));
     await localSearchHistory.getHistory();
     localSearchHistory.searchHistory.isNotEmpty
         ? emit(state.copyWith(
@@ -61,8 +59,7 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
       await _localFavoriteDataBase.removeRepos(event.id);
       emit(state.copyWith(isFavoriteRepos: false));
     } else {
-      // await _localFavoriteDataBase.addFavoriteRepos(
-      //     state.repositories.is);
+      await _localFavoriteDataBase.addFavoriteRepos(state.repositories.firstWhere((element) => element.id == event.id));
       emit(state.copyWith(isFavoriteRepos: true));
     }
   }

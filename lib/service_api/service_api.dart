@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:http/http.dart' as http;
 import 'package:lead_do_it_test/constants.dart';
 import 'package:lead_do_it_test/models/repository_model.dart';
-import 'package:http/http.dart' as http;
 
 class ServiceApi {
   Future<List<RepositoryModel>> fetchRepositories(

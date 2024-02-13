@@ -16,5 +16,5 @@ class Palette {
   static const Color textPlaceholder = Color(0xFFBFBFBF);
 
   //Spinner
-static const Color spinner = Color(0xFF8E8E93);
+  static const Color spinner = Color(0xFF8E8E93);
 }

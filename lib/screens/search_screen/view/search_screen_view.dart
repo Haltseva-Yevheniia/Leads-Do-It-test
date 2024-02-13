@@ -15,25 +15,27 @@ class SearchScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(navigationBarSearchScreen, style: FontStyles.headerMain,),
+        title: Text(
+          navigationBarSearchScreen,
+          style: FontStyles.headerMain,
+        ),
         centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => const FavoriteScreenView()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FavoriteScreenView()));
                 },
                 child: const IconStar()),
           ),
         ],
-
       ),
       body: BlocProvider(
-        create: (_) =>
-        SearchScreenBloc()
-          ..add(SearchScreenInitialEvent()),
+        create: (_) => SearchScreenBloc()..add(SearchScreenInitialEvent()),
         //path to our SearchScreenBloc and default State
         child: const SearchScreen(),
       ),

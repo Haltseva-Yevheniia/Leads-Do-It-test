@@ -17,9 +17,6 @@ class _LoadingScreenViewState extends State<LoadingScreenView> {
   // Future<void> nextScreen() async {
   //   await Future.delayed(const Duration(seconds: 5));
 
-
-
-
   @override
   void initState() {
     // nextScreen();
@@ -40,18 +37,23 @@ class _LoadingScreenViewState extends State<LoadingScreenView> {
     return const Scaffold(
       backgroundColor: Palette.accentPrimary,
       body:
-      //Center(child: CircularProgressIndicator()),
-      Center(child:
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text('Search App', style: FontStyles.headerMain),
-          SizedBox(height: 16,),
-          CupertinoActivityIndicator(radius: 22, color: Palette.spinner,),
-
-        ],
-      ),),
+          //Center(child: CircularProgressIndicator()),
+          Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text('Search App', style: FontStyles.headerMain),
+            SizedBox(
+              height: 16,
+            ),
+            CupertinoActivityIndicator(
+              radius: 22,
+              color: Palette.spinner,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

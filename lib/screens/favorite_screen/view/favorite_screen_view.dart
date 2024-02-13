@@ -11,7 +11,10 @@ class FavoriteScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(navigationBarFavoriteScreen, style: FontStyles.headerMain,),
+        title: const Text(
+          navigationBarFavoriteScreen,
+          style: FontStyles.headerMain,
+        ),
         centerTitle: true,
         leading: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 9, vertical: 9),

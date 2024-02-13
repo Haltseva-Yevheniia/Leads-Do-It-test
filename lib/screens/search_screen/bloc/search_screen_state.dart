@@ -1,23 +1,23 @@
 part of 'search_screen_bloc.dart';
 
-enum SearchScreenStatus {initial,initialHistory, loading, success, failure}
+enum SearchScreenStatus { initial, initialHistory, loading, success, failure }
 
 final class SearchScreenState extends Equatable {
-
   final SearchScreenStatus status;
   final List<RepositoryModel> repositories;
-  final List <String> searchHistory;
+  final List<String> searchHistory;
   final bool isFavoriteRepos;
-final bool isHistoryEmpty;
+  final bool isHistoryEmpty;
+
   const SearchScreenState({
     this.status = SearchScreenStatus.initial,
-    this.repositories = const <RepositoryModel> [],
-    this.searchHistory = const <String> [],
-  this.isFavoriteRepos = false,
-  this.isHistoryEmpty = true,
-});
+    this.repositories = const <RepositoryModel>[],
+    this.searchHistory = const <String>[],
+    this.isFavoriteRepos = false,
+    this.isHistoryEmpty = true,
+  });
 
-  SearchScreenState copyWith ({
+  SearchScreenState copyWith({
     SearchScreenStatus? status,
     List<RepositoryModel>? repositories,
     List<String>? searchHistory,
@@ -34,10 +34,11 @@ final bool isHistoryEmpty;
   }
 
   @override
-  List<Object?> get props => [status, repositories, searchHistory, isFavoriteRepos, isHistoryEmpty];
+  List<Object?> get props =>
+      [status, repositories, searchHistory, isFavoriteRepos, isHistoryEmpty];
 
   @override
-  String toString () {
+  String toString() {
     return 'SearchScreenState: {repositoriesLength: ${repositories.length}, Status: $status, isFavoriteRepos: $isFavoriteRepos  }';
   }
 }
