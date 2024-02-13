@@ -7,6 +7,7 @@ import 'package:lead_do_it_test/style/font_styles.dart';
 import 'package:lead_do_it_test/widgets/icon_star.dart';
 
 import '../../../constants.dart';
+import '../../../widgets/icon_favorite_list.dart';
 
 class SearchScreenView extends StatelessWidget {
   const SearchScreenView({super.key});
@@ -30,7 +31,7 @@ class SearchScreenView extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const FavoriteScreenView()));
                 },
-                child: const IconStar()),
+                child: const IconFavoriteList()),
           ),
         ],
       ),

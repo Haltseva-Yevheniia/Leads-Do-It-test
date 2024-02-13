@@ -59,7 +59,8 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
       await _localFavoriteDataBase.removeRepos(event.id);
       emit(state.copyWith(isFavoriteRepos: false));
     } else {
-      await _localFavoriteDataBase.addFavoriteRepos(state.repositories.firstWhere((element) => element.id == event.id));
+      await _localFavoriteDataBase.addFavoriteRepos(
+          id: event.id, name: event.name);
       emit(state.copyWith(isFavoriteRepos: true));
     }
   }

@@ -11,7 +11,7 @@ class SearchCard extends StatelessWidget {
     super.key,
     required this.name,
 
-    // required this.isFavorite,
+    //required this.isFavorite,
     this.trailing = const SizedBox.shrink(),
   });
 
@@ -20,7 +20,11 @@ class SearchCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
       child: Container(
-        color: Palette.layer1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Palette.layer1
+        ) ,
+
         child: ListTile(
           title: Text(
             name,
@@ -29,7 +33,7 @@ class SearchCard extends StatelessWidget {
           trailing: trailing,
           shape: RoundedRectangleBorder(
             side: const BorderSide(color: Colors.white, width: 1),
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
       ),

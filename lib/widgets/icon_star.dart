@@ -11,15 +11,16 @@ class IconStar extends StatelessWidget {
       height: 44,
       width: 44,
       decoration: BoxDecoration(
-        color: Palette.accentPrimary,
+        color: Palette.layer1,
         borderRadius: BorderRadius.circular(12.0),
         // Set radius for a circular border
         border: Border.all(
-          color: Palette.accentPrimary, // Set the border color
+          color: Palette.layer1, // Set the border color
         ),
       ),
       child: Center(
-        child: SvgPicture.asset('asset/icons/Vector.svg'),
+        child: SvgPicture.asset('asset/icons/Vector.svg',  colorFilter:
+    ColorFilter.mode(Palette.accentPrimary, BlendMode.srcIn)),
       ),
     );
   }

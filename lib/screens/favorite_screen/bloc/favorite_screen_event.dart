@@ -11,6 +11,7 @@ final class FetchFavoriteRepos extends FavoriteScreenEvent {}
 
 final class ToggleFavoriteRepos extends FavoriteScreenEvent {
   final int id;
+  final String name;
 
-  const ToggleFavoriteRepos({required this.id});
+  const ToggleFavoriteRepos({required this.id, required this.name});
 }

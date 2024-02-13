@@ -20,10 +20,10 @@ class DataBaseService {
 
 ////write
 
-  Future<void> addFavoriteRepos(FavoriteRepos repository) async {
+  Future<void> addFavoriteRepos({required int id, required String name}) async {
     final newRepos = FavoriteRepos()
-      ..id = repository.id
-      ..name = repository.name;
+      ..id = id
+      ..name = name;
     await isar.writeTxn(() => isar.favoriteRepos.put(newRepos));
   }
 

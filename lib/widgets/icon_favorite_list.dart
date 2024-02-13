@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lead_do_it_test/style/palette.dart';
 
-class IconNotFavoriteStar extends StatelessWidget {
-  const IconNotFavoriteStar({super.key});
+class IconFavoriteList extends StatelessWidget {
+  const IconFavoriteList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,19 +11,15 @@ class IconNotFavoriteStar extends StatelessWidget {
       height: 44,
       width: 44,
       decoration: BoxDecoration(
-        color: Palette.layer1,
+        color: Palette.accentPrimary,
         borderRadius: BorderRadius.circular(12.0),
         // Set radius for a circular border
         border: Border.all(
-          color: Palette.layer1, // Set the border color
+          color: Palette.accentPrimary, // Set the border color
         ),
       ),
       child: Center(
-        child: SvgPicture.asset(
-          'asset/icons/Vector.svg',
-          colorFilter:
-              ColorFilter.mode(Palette.textPlaceholder, BlendMode.srcIn),
-        ),
+        child: SvgPicture.asset('asset/icons/Vector.svg',  ),
       ),
     );
   }

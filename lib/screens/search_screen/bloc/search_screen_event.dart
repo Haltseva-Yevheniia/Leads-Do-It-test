@@ -17,6 +17,7 @@ final class ReposFetchedEvent extends SearchScreenEvent {
 
 final class ToggleFavoriteRepos extends SearchScreenEvent {
   final int id;
+  final String name;
 
-  const ToggleFavoriteRepos({required this.id});
+  const ToggleFavoriteRepos({required this.id, required this.name});
 }

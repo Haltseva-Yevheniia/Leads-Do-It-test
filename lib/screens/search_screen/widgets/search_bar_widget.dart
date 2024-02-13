@@ -6,7 +6,8 @@ import 'package:lead_do_it_test/screens/search_screen/bloc/search_screen_bloc.da
 import 'package:lead_do_it_test/style/palette.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({super.key});
+  final Widget trailing;
+  const SearchBarWidget({super.key, this.trailing = const SizedBox.shrink()});
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
@@ -48,6 +49,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               width: 24,
             ),
           ),
+          suffixIcon: widget.trailing,
           hintText: hintText,
           hintStyle: const TextStyle(color: Palette.textPlaceholder),
           //hintStyle: bodyStyle,
