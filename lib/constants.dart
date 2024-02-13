@@ -3,13 +3,14 @@
 // API service
 
 // String tokenGitHub = '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';
+///String tokenGitHubNEW = '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';
 const String baseURL = 'api.github.com';
 const String pathURL = 'search/repositories';
 const int searchResultsOutput = 15;
 const Map<String, String> headers = {
   'Accept': 'application/vnd.github+json',
   'Authorization':
-  'Bearer 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',
+  'Bearer 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',
 };
 
 

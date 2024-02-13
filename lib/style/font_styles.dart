@@ -2,8 +2,12 @@
 import 'package:flutter/material.dart';
 
 class FontStyles {
- static const TextStyle headerMain = TextStyle(
+  final Color color;
+   FontStyles ({required this.color});
+
+static const TextStyle headerMain = TextStyle(
     fontFamily: 'Raleway',
+   // color: color,
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );

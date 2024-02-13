@@ -45,49 +45,76 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
             Expanded(
-                child: Container(
-              child: state.isHistoryEmpty
-                  ? Center(
-                      child: Text(
-                        emptyHistory,
-                        textAlign: TextAlign.center,
-                      ),
-                    )
-                  : ListView.builder(
-                      itemCount: state.searchHistory.length,
-                      itemBuilder: (context, index) {
-                        return SearchCard(
-                          name: state.searchHistory[index],
-                        );
-                      }),
-            ))
+              child: Container(
+                child: state.isHistoryEmpty
+                    ? Center(
+                        child: Text(
+                          emptyHistory,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: state.searchHistory.length,
+                        itemBuilder: (context, index) {
+                          return SearchCard(
+                            name: state.searchHistory[index],
+                          );
+                        }),
+              ),
+            )
           ],
         );
       }
       if (state.status == SearchScreenStatus.loading) {
-        return ListView(
-          children: const [
-            SearchBar(),
-            SizedBox(
-              height: 24,
+        return const Column(children: [
+          Divider(height: 1, thickness: 1, color: Palette.layer1),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: SearchBarWidget(),
+                ),
+              ],
             ),
-            CupertinoActivityIndicator(
+          ),
+          SizedBox(
+            height: 24,
+          ),
+          Center(
+            child: CupertinoActivityIndicator(
               radius: 22,
               color: Palette.spinner,
             ),
-          ],
-        );
+          ),
+        ]);
       }
       if (state.status == SearchScreenStatus.success) {
-        return ListView(
+        return Column(
           children: [
-            const SearchBarWidget(),
-            Text(searchResultHeader),
-            ListView.builder(
-                itemCount: state.searchHistory.length,
-                itemBuilder: (context, index) {
-                  return SearchCard(name: state.repositories[index].name);
-                }),
+            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SearchBarWidget(),
+                  ),
+                  Text(searchResultHeader),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: state.searchHistory.length,
+                  itemBuilder: (context, index) {
+                    return SearchCard(name: state.repositories[index].name);
+                  }),
+            ),
           ],
         );
       } else {
@@ -113,18 +140,14 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Expanded(
                 child: Container(
-                  child: Center(
-                    child: Text(
-                      emptySearchResultBody,
-                      textAlign: TextAlign.center,
-                    ),
-                  )
-
-                ))
+                    child: Center(
+              child: Text(
+                emptySearchResultBody,
+                textAlign: TextAlign.center,
+              ),
+            )))
           ],
         );
-
-
       }
     });
   }

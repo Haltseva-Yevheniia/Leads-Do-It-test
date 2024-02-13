@@ -14,47 +14,60 @@ class SearchBarWidget extends StatefulWidget {
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
 
+
   @override
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
+    final FocusNode _focusNode = FocusNode();
     //bool isEnable = false;
 
-    return TextField(
-      controller: searchController,
-    onTap: (){
+    return GestureDetector(
+      onTap: (){
+        _focusNode.unfocus();
+      },
+      child: TextField(
+        controller: searchController,
+      textInputAction: TextInputAction.done,
+      onEditingComplete: (){
         context.read<SearchScreenBloc>().add(ReposFetchedEvent(name: searchController.text));
         searchController.clear();
-    },
-      //keyboardType: TextInputType.text,
+      },
+      focusNode: _focusNode,
+      // onTap: (){
+      //     context.read<SearchScreenBloc>().add(ReposFetchedEvent(name: searchController.text));
+      //     searchController.clear();
+      // },
+        //keyboardType: TextInputType.text,
 
-      decoration: InputDecoration(
-        prefixIcon: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SvgPicture.asset(
-            'asset/icons/Search.svg', height: 24, width: 24,),
-        ),
-        hintText: hintText,
-        hintStyle: const TextStyle(color: Palette.textPlaceholder),
-        //hintStyle: bodyStyle,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(
-            color: Palette.layer1,
+        decoration: InputDecoration(
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SvgPicture.asset(
+              'asset/icons/Search.svg', height: 24, width: 24,),
           ),
-        ),
+          hintText: hintText,
+          hintStyle: const TextStyle(color: Palette.textPlaceholder),
+          //hintStyle: bodyStyle,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: const BorderSide(
+              color: Palette.layer1,
+            ),
+          ),
 
-        //fillColor: Palette.accentSecondary,
-        //filled: true,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: const BorderSide(
-            width: 2,
-            color: Palette.accentPrimary,
+          //fillColor: Palette.accentSecondary,
+          //filled: true,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30),
+            borderSide: const BorderSide(
+              width: 2,
+              color: Palette.accentPrimary,
+            ),
           ),
+          //  focusColor: Palette.accentSecondary,
         ),
-        //  focusColor: Palette.accentSecondary,
+        //enabled: isEnable,
       ),
-      //enabled: isEnable,
     );
   }
 }
