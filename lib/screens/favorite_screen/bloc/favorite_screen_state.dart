@@ -2,21 +2,14 @@ part of 'favorite_screen_bloc.dart';
 
 final class FavoriteScreenState extends Equatable {
   const FavoriteScreenState();
-  // final List<FavoriteRepos> favoriteRepos;
-  // const FavoriteScreenState({required this.favoriteRepos});
 
   @override
   List<Object> get props => [];
 }
 
-final class FavoriteScreenInitial extends FavoriteScreenState {
-// const FavoriteScreenInitial ({required super.favoriteRepos});
-}
+final class FavoriteScreenInitial extends FavoriteScreenState {}
 
-final class FavoriteScreenLoading extends FavoriteScreenState {
- // const FavoriteScreenLoading({required super.favoriteRepos});
-
-}
+final class FavoriteScreenLoading extends FavoriteScreenState {}
 
 final class FavoriteScreenSuccess extends FavoriteScreenState {
   final List<FavoriteRepos> favoriteRepos;
@@ -30,11 +23,8 @@ final class FavoriteScreenSuccess extends FavoriteScreenState {
 final class ToggleFavorite extends FavoriteScreenState {
   final bool isFavorite;
   final List<FavoriteRepos> favoriteRepos;
-  const ToggleFavorite({this.isFavorite = true, required this.favoriteRepos});
 
-  // ToggleFavorite copyWith(bool? isFavorite) {
-  //   return ToggleFavorite(isFavorite: isFavorite ?? this.isFavorite);
-  // }
+  const ToggleFavorite({this.isFavorite = true, required this.favoriteRepos});
 
   @override
   List<Object> get props => [isFavorite];

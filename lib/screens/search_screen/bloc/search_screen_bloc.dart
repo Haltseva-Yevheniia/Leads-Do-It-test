@@ -1,7 +1,8 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
+//import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lead_do_it_test/local_search_history/local_search_history.dart';
 import 'package:lead_do_it_test/models/repository_model.dart';
 import 'package:lead_do_it_test/service_api/service_api.dart';
@@ -9,7 +10,6 @@ import 'package:lead_do_it_test/service_api/service_api.dart';
 import '../../../local_data_base/data_base_service.dart';
 
 part 'search_screen_event.dart';
-
 part 'search_screen_state.dart';
 
 class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
@@ -37,7 +37,6 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
 
   Future<void> _onFetchedRepos(
       FetchReposEvent event, Emitter<SearchScreenState> emit) async {
-    // if (state is GotHistoryState) {
     emit(SearchScreenLoadingState());
     try {
       localSearchHistory.addHistory(event.name);
@@ -56,11 +55,6 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
     } catch (_) {
       emit(SearchScreenFailure());
     }
-    //}
-    //
-    // if (state is FetchReposSuccessState) {
-    //
-    // }
   }
 
   Future<void> _onToggleFavoriteRepos(
@@ -80,7 +74,6 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
           currentListId.where((id) => favoriteListId.contains(id)).toList();
 
       emit(ToggleSearchCardState(
-
           favoritesFromCurrentListId: favoritesFromCurrentListId,
           repositories: event.repositories));
     } else {
@@ -93,8 +86,8 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
           event.repositories.map((repos) => repos.id).toList();
       List<int> favoritesFromCurrentListId =
           currentListId.where((id) => favoriteListId.contains(id)).toList();
-      emit(ToggleSearchCardState(
 
+      emit(ToggleSearchCardState(
           favoritesFromCurrentListId: favoritesFromCurrentListId,
           repositories: event.repositories));
     }

@@ -3,14 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:lead_do_it_test/screens/search_screen/bloc/search_screen_bloc.dart';
-import 'package:lead_do_it_test/screens/search_screen/widgets/search_bar_widget.dart';
-import 'package:lead_do_it_test/style/font_styles.dart';
-import 'package:lead_do_it_test/widgets/search_card.dart';
 
 import '../../../constants.dart';
-import '../../../style/palette.dart';
-import '../../../widgets/icon_not_favor_star.dart';
-import '../../../widgets/icon_star.dart';
+import '../../../style/style.dart';
+import '../../../widgets/project_widgets.dart';
+import '../widgets/search_screen_widgets.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -20,8 +17,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  // TextEditingController searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchScreenBloc, SearchScreenState>(
@@ -30,12 +25,12 @@ class _SearchScreenState extends State<SearchScreen> {
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: SearchBarWidget(),
                   ),
@@ -50,7 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Expanded(
               child: Container(
                 child: state.isHistoryEmpty
-                    ? Center(
+                    ? const Center(
                         child: Text(
                           emptyHistory,
                           style: FontStyles.bodyPlaceHolder,
@@ -114,7 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   ),
-                  Text(
+                  const Text(
                     searchResultHeader,
                     style: FontStyles.headerMainAccent,
                   ),
@@ -129,15 +124,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       name: state.repositories[index].name,
                       trailing: GestureDetector(
                           onTap: () {
-                            context
-                                .read<SearchScreenBloc>()
-                                .add(ToggleFavoriteRepos(
-                                  id: state.repositories[index].id,
-                                  name: state.repositories[index].name,
-                              repositories: state.repositories,
-                                ),);
+                            context.read<SearchScreenBloc>().add(
+                                  ToggleFavoriteRepos(
+                                    id: state.repositories[index].id,
+                                    name: state.repositories[index].name,
+                                    repositories: state.repositories,
+                                  ),
+                                );
                           },
-                          child: state.favoritesFromCurrentListId.contains(state.repositories[index].id)
+                          child: state.favoritesFromCurrentListId
+                                  .contains(state.repositories[index].id)
                               ? const IconStar()
                               : const IconNotFavoriteStar()),
                     );
@@ -149,7 +145,7 @@ class _SearchScreenState extends State<SearchScreen> {
       if (state is ToggleSearchCardState) {
         return Column(
           children: [
-            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            dividerAppBar,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               child: Column(
@@ -163,7 +159,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   ),
-                  Text(
+                  const Text(
                     searchResultHeader,
                     style: FontStyles.headerMainAccent,
                   ),
@@ -178,15 +174,16 @@ class _SearchScreenState extends State<SearchScreen> {
                       name: state.repositories[index].name,
                       trailing: GestureDetector(
                           onTap: () {
-                            context
-                                .read<SearchScreenBloc>()
-                                .add(ToggleFavoriteRepos(
-                              id: state.repositories[index].id,
-                              name: state.repositories[index].name,
-                              repositories: state.repositories,
-                            ),);
+                            context.read<SearchScreenBloc>().add(
+                                  ToggleFavoriteRepos(
+                                    id: state.repositories[index].id,
+                                    name: state.repositories[index].name,
+                                    repositories: state.repositories,
+                                  ),
+                                );
                           },
-                          child: state.favoritesFromCurrentListId.contains(state.repositories[index].id)
+                          child: state.favoritesFromCurrentListId
+                                  .contains(state.repositories[index].id)
                               ? const IconStar()
                               : const IconNotFavoriteStar()),
                     );
@@ -194,43 +191,9 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ],
         );
-      }
-      else {
-        return Column(
-          children: [
-            const Divider(height: 1, thickness: 1, color: Palette.layer1),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SearchBarWidget(
-                      trailing: SvgPicture.asset('asset/icons/Close.svg'),
-                    ),
-                  ),
-                  Text(
-                    emptySearchResultHeader,
-                    textAlign: TextAlign.left,
-                    style: FontStyles.headerMainAccent,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-                child: Container(
-                    child: Center(
-              child: Text(
-                emptySearchResultBody,
-                style: FontStyles.bodyPlaceHolder,
-                textAlign: TextAlign.center,
-              ),
-            )))
-          ],
-        );
+      } else {
+        return const SearchScreenFailureWidget();
       }
     });
   }
 }
-

@@ -11,8 +11,6 @@ final class SearchScreenInitialEvent extends SearchScreenEvent {}
 
 // final class StartSearchEvent extends SearchScreenEvent{}
 
-
-
 final class FetchReposEvent extends SearchScreenEvent {
   final String name;
 
@@ -24,5 +22,6 @@ final class ToggleFavoriteRepos extends SearchScreenEvent {
   final String name;
   final List<RepositoryModel> repositories;
 
-  const ToggleFavoriteRepos({required this.id, required this.name, required this.repositories});
+  const ToggleFavoriteRepos(
+      {required this.id, required this.name, required this.repositories});
 }

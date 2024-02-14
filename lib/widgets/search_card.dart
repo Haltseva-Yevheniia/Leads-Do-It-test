@@ -3,15 +3,11 @@ import 'package:lead_do_it_test/style/palette.dart';
 
 class SearchCard extends StatelessWidget {
   final String name;
-
-  //final bool isFavorite;
   final Widget trailing;
 
   const SearchCard({
     super.key,
     required this.name,
-
-    //required this.isFavorite,
     this.trailing = const SizedBox.shrink(),
   });
 

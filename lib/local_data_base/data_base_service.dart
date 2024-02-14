@@ -47,7 +47,7 @@ class DataBaseService {
     });
   }
 
-//// getFavoriteOrNOT
+//// isFavorite Or NOT
 
   Future<bool> isReposFavorite(int id) async {
     final repository =

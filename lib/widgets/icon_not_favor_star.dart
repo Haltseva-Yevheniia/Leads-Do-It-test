@@ -13,9 +13,8 @@ class IconNotFavoriteStar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Palette.layer1,
         borderRadius: BorderRadius.circular(12.0),
-        // Set radius for a circular border
         border: Border.all(
-          color: Palette.layer1, // Set the border color
+          color: Palette.layer1,
         ),
       ),
       child: Center(

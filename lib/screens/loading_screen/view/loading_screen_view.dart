@@ -6,6 +6,8 @@ import 'package:lead_do_it_test/screens/search_screen/view/search_screen_view.da
 import 'package:lead_do_it_test/style/font_styles.dart';
 import 'package:lead_do_it_test/style/palette.dart';
 
+import '../../../constants.dart';
+
 class LoadingScreenView extends StatefulWidget {
   const LoadingScreenView({super.key});
 
@@ -14,17 +16,10 @@ class LoadingScreenView extends StatefulWidget {
 }
 
 class _LoadingScreenViewState extends State<LoadingScreenView> {
-  // Future<void> nextScreen() async {
-  //   await Future.delayed(const Duration(seconds: 5));
-
   @override
   void initState() {
-    // nextScreen();
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => const SearchScreen()));
     super.initState();
     Timer(const Duration(seconds: 5), () {
-      // After 5 seconds, navigate to the next screen
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const SearchScreenView()),
@@ -36,14 +31,12 @@ class _LoadingScreenViewState extends State<LoadingScreenView> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Palette.accentPrimary,
-      body:
-          //Center(child: CircularProgressIndicator()),
-          Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('Search App', style: FontStyles.headerMainWhite),
+            Text(loadingText, style: FontStyles.headerMainWhite),
             SizedBox(
               height: 16,
             ),

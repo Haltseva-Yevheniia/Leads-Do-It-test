@@ -1,26 +1,29 @@
 // API service
+/// MY TOKEN I send it additionally or you can use yours
 
+const String myToken = '';
 const String baseURL = 'api.github.com';
 const String pathURL = 'search/repositories';
 const int searchResultsOutput = 15;
 const Map<String, String> headers = {
   'Accept': 'application/vnd.github+json',
-  'Authorization': 'Bearer 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',
+  'Authorization': 'Bearer $myToken',
 };
 
 // TEXTS
 
 /// LoadingScreen
+const String loadingText = 'Search App';
 
 /// SearchScreen
-String navigationBarSearchScreen = 'Github repos list';
-String searchHistory = 'Search History';
-String emptyHistory =
+const String navigationBarSearchScreen = 'Github repos list';
+const String searchHistory = 'Search History';
+const String emptyHistory =
     'You have empty history. \nClick on search to start journey!';
-String emptySearchResultHeader = 'What we found';
-String emptySearchResultBody =
+const String emptySearchResultHeader = 'What we found';
+const String emptySearchResultBody =
     'Nothing was found for your search. \nPlease check the spelling';
-String searchResultHeader = 'What we have found';
+const String searchResultHeader = 'What we have found';
 const String hintText = 'Search';
 
 ///FavoriteScreen

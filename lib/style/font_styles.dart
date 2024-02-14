@@ -4,7 +4,6 @@ import 'package:lead_do_it_test/style/palette.dart';
 class FontStyles {
   static const TextStyle headerMain = TextStyle(
     fontFamily: 'Raleway',
-    //color: color,
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );

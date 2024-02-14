@@ -17,9 +17,8 @@ class IconGoBack extends StatelessWidget {
         decoration: BoxDecoration(
           color: Palette.accentPrimary,
           borderRadius: BorderRadius.circular(12.0),
-          // Set radius for a circular border
           border: Border.all(
-            color: Palette.accentPrimary, // Set the border color
+            color: Palette.accentPrimary,
           ),
         ),
         child: Center(

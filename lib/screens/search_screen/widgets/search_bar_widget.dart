@@ -19,7 +19,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
     final FocusNode focusNode = FocusNode();
-    //bool isEnable = false;
 
     return GestureDetector(
       onTap: () {
@@ -35,19 +34,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           searchController.clear();
         },
         focusNode: focusNode,
-        onSubmitted: (value){
+        onSubmitted: (value) {
           focusNode.unfocus();
         },
-       onTapOutside: (value){
+        onTapOutside: (value) {
           focusNode.unfocus();
-        } ,
-
-        // onTap: (){
-        //     context.read<SearchScreenBloc>().add(ReposFetchedEvent(name: searchController.text));
-        //     searchController.clear();
-        // },
-        //keyboardType: TextInputType.text,
-
+        },
         decoration: InputDecoration(
           prefixIcon: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -58,23 +50,18 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             ),
           ),
           suffix: GestureDetector(
-              onTap: (){
+              onTap: () {
                 searchController.clear();
               },
               child: widget.trailing),
           hintText: hintText,
           hintStyle: const TextStyle(color: Palette.textPlaceholder),
-          //hintStyle: bodyStyle,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(
               color: Palette.layer1,
             ),
           ),
-
-
-          //fillColor: Palette.accentSecondary,
-          //filled: true,
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(
@@ -82,9 +69,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               color: Palette.accentPrimary,
             ),
           ),
-          //  focusColor: Palette.accentSecondary,
         ),
-        //enabled: isEnable,
       ),
     );
   }

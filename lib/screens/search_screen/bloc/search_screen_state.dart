@@ -1,10 +1,10 @@
 part of 'search_screen_bloc.dart';
 
-final class SearchScreenState extends Equatable {
+sealed class SearchScreenState extends Equatable {
   const SearchScreenState();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
 final class SearchScreenInitialState extends SearchScreenState {}
@@ -20,8 +20,7 @@ final class GotHistoryState extends SearchScreenState {
     this.isHistoryEmpty = true,
   });
 
-  @override
-  List<Object?> get prop => [searchHistory, isHistoryEmpty];
+  List<Object> get prop => [searchHistory, isHistoryEmpty];
 
   @override
   String toString() {
@@ -33,18 +32,14 @@ final class ReadySearchState extends SearchScreenState {}
 
 final class FetchReposSuccessState extends SearchScreenState {
   final List<RepositoryModel> repositories;
-  //final List<int?> favoriteListId;
   final List<int> favoritesFromCurrentListId;
 
   const FetchReposSuccessState({
     this.repositories = const <RepositoryModel>[],
     this.favoritesFromCurrentListId = const <int>[],
-   // this.favoriteListId = const <int>[],
   });
 
-  @override
-  List<Object?> get prop =>
-      [repositories, favoritesFromCurrentListId];
+  List<Object> get prop => [repositories, favoritesFromCurrentListId];
 
   @override
   String toString() {
@@ -53,23 +48,15 @@ final class FetchReposSuccessState extends SearchScreenState {
 }
 
 final class ToggleSearchCardState extends SearchScreenState {
-    final List<RepositoryModel> repositories;
+  final List<RepositoryModel> repositories;
   final List<int> favoritesFromCurrentListId;
 
   const ToggleSearchCardState({
-
     this.repositories = const <RepositoryModel>[],
     this.favoritesFromCurrentListId = const <int>[],
-
   });
 
-  @override
-  List<Object?> get prop => [repositories,favoritesFromCurrentListId];
-
-  // @override
-  // String toString() {
-  //   return 'ToggleSearchCardState:{ isFavorite: $isFavorite  }';
-  // }
+  List<Object> get prop => [repositories, favoritesFromCurrentListId];
 }
 
 final class SearchScreenFailure extends SearchScreenState {}

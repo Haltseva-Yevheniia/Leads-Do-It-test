@@ -15,7 +15,7 @@ class SearchScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           navigationBarSearchScreen,
           style: FontStyles.headerMain,
         ),
