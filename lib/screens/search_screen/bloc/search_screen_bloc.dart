@@ -18,7 +18,7 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
 
   SearchScreenBloc() : super(const SearchScreenState()) {
     on<SearchScreenInitialEvent>(_onGetHistory);
-    on<ReposFetchedEvent>(_onFetchedRepos);
+    on<FetchReposEvent>(_onFetchedRepos);
     on<ToggleFavoriteRepos>(_onToggleFavoriteRepos);
   }
 
@@ -34,7 +34,7 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
   }
 
   Future<void> _onFetchedRepos(
-      ReposFetchedEvent event, Emitter<SearchScreenState> emit) async {
+      FetchReposEvent event, Emitter<SearchScreenState> emit) async {
     emit(state.copyWith(status: SearchScreenStatus.loading));
     try {
       localSearchHistory.addHistory(event.name);

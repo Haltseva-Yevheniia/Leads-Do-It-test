@@ -59,13 +59,40 @@ class FavoriteScreen extends StatelessWidget {
                                   name: state.favoriteRepos[index].name!,
                                 ));
                           },
-                          child: state.isFavorite
-                              ? const IconStar()
-                              : const IconNotFavoriteStar()),
+                          child: const IconStar()
+                          // state.isFavorite
+                          //     ? const IconStar()
+                          //     : const IconNotFavoriteStar(),
+              ),
                       name: state.favoriteRepos[index].name!)
                   : const SizedBox.shrink();
             });
-      } else {
+      }
+if(state is ToggleFavorite) {
+  return ListView.builder(
+      itemCount: state.favoriteRepos.length,
+      itemBuilder: (BuildContext context, int index) {
+        return state.favoriteRepos.isNotEmpty
+            ? SearchCard(
+            trailing: GestureDetector(
+                onTap: () {
+                  context
+                      .read<FavoriteScreenBloc>()
+                      .add(ToggleFavoriteRepos(
+                    id: state.favoriteRepos[index].id!,
+                    name: state.favoriteRepos[index].name!,
+                  ));
+                },
+                child: const IconStar()
+              // state.isFavorite
+              //     ? const IconStar()
+              //     : const IconNotFavoriteStar(),
+            ),
+            name: state.favoriteRepos[index].name!)
+            : const SizedBox.shrink();
+      });
+}
+      else {
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),

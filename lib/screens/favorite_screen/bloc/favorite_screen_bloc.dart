@@ -30,21 +30,32 @@ class FavoriteScreenBloc
 
   Future<void> _onToggleFavoriteRepos(
       ToggleFavoriteRepos event, Emitter<FavoriteScreenState> emit) async {
-    emit(const ToggleFavorite());
-    final isFavourite = await _localFavoriteDataBase.isReposFavorite(event.id);
-    if (isFavourite) {
-      await _localFavoriteDataBase.removeRepos(event.id);
-      final fetchFavouriteRepos =
-          await _localFavoriteDataBase.fetchFavoriteRepos();
-      emit(FavoriteScreenSuccess(
-          favoriteRepos: fetchFavouriteRepos, isFavorite: false));
-    } else {
-      await _localFavoriteDataBase.addFavoriteRepos(
-          id: event.id, name: event.name);
-      final fetchFavouriteRepos =
-          await _localFavoriteDataBase.fetchFavoriteRepos();
-      emit(FavoriteScreenSuccess(
-          favoriteRepos: fetchFavouriteRepos, isFavorite: true));
-    }
+    emit(FavoriteScreenLoading());
+    await _localFavoriteDataBase.removeRepos(event.id);
+    final fetchFavouriteRepos =
+    await _localFavoriteDataBase.fetchFavoriteRepos();
+    emit(FavoriteScreenSuccess(favoriteRepos: fetchFavouriteRepos));
   }
+
+
+  //
+  // Future<void> _onToggleFavoriteRepos(
+  //     ToggleFavoriteRepos event, Emitter<FavoriteScreenState> emit) async {
+  //   //emit(const ToggleFavorite());
+  //   final isFavourite = await _localFavoriteDataBase.isReposFavorite(event.id);
+  //   if (isFavourite) {
+  //     await _localFavoriteDataBase.removeRepos(event.id);
+  //     final fetchFavouriteRepos =
+  //         await _localFavoriteDataBase.fetchFavoriteRepos();
+  //     emit(ToggleFavorite(
+  //        isFavorite: false, favoriteRepos: fetchFavouriteRepos ));
+  //   } else {
+  //     await _localFavoriteDataBase.addFavoriteRepos(
+  //         id: event.id, name: event.name);
+  //     final fetchFavouriteRepos =
+  //         await _localFavoriteDataBase.fetchFavoriteRepos();
+  //     emit(ToggleFavorite(
+  //         isFavorite:true, favoriteRepos: fetchFavouriteRepos));
+  //   }
+  // }
 }

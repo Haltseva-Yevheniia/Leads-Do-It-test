@@ -9,10 +9,11 @@ sealed class SearchScreenEvent extends Equatable {
 
 final class SearchScreenInitialEvent extends SearchScreenEvent {}
 
-final class ReposFetchedEvent extends SearchScreenEvent {
+
+final class FetchReposEvent extends SearchScreenEvent {
   final String name;
 
-  const ReposFetchedEvent({required this.name});
+  const FetchReposEvent({required this.name});
 }
 
 final class ToggleFavoriteRepos extends SearchScreenEvent {

@@ -31,7 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         onEditingComplete: () {
           context
               .read<SearchScreenBloc>()
-              .add(ReposFetchedEvent(name: searchController.text));
+              .add(FetchReposEvent(name: searchController.text));
           searchController.clear();
         },
         focusNode: focusNode,
