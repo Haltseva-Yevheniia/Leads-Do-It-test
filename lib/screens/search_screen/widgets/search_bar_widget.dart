@@ -35,6 +35,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           searchController.clear();
         },
         focusNode: focusNode,
+        onSubmitted: (value){
+          focusNode.unfocus();
+        },
+       onTapOutside: (value){
+          focusNode.unfocus();
+        } ,
+
         // onTap: (){
         //     context.read<SearchScreenBloc>().add(ReposFetchedEvent(name: searchController.text));
         //     searchController.clear();
@@ -50,7 +57,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               width: 24,
             ),
           ),
-          suffix: widget.trailing,
+          suffix: GestureDetector(
+              onTap: (){
+                searchController.clear();
+              },
+              child: widget.trailing),
           hintText: hintText,
           hintStyle: const TextStyle(color: Palette.textPlaceholder),
           //hintStyle: bodyStyle,
@@ -60,6 +71,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               color: Palette.layer1,
             ),
           ),
+
 
           //fillColor: Palette.accentSecondary,
           //filled: true,

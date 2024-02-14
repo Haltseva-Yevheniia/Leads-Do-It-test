@@ -9,6 +9,9 @@ sealed class SearchScreenEvent extends Equatable {
 
 final class SearchScreenInitialEvent extends SearchScreenEvent {}
 
+// final class StartSearchEvent extends SearchScreenEvent{}
+
+
 
 final class FetchReposEvent extends SearchScreenEvent {
   final String name;
@@ -19,6 +22,7 @@ final class FetchReposEvent extends SearchScreenEvent {
 final class ToggleFavoriteRepos extends SearchScreenEvent {
   final int id;
   final String name;
+  final List<RepositoryModel> repositories;
 
-  const ToggleFavoriteRepos({required this.id, required this.name});
+  const ToggleFavoriteRepos({required this.id, required this.name, required this.repositories});
 }

@@ -26,7 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchScreenBloc, SearchScreenState>(
         builder: (context, state) {
-      if (state.status == SearchScreenStatus.initialHistory) {
+      if (state is GotHistoryState) {
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),
@@ -69,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ],
         );
       }
-      if (state.status == SearchScreenStatus.loading) {
+      if (state is SearchScreenLoadingState) {
         return Column(children: [
           const Divider(height: 1, thickness: 1, color: Palette.layer1),
           Padding(
@@ -97,7 +97,7 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ]);
       }
-      if (state.status == SearchScreenStatus.success) {
+      if (state is FetchReposSuccessState) {
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),
@@ -134,9 +134,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                 .add(ToggleFavoriteRepos(
                                   id: state.repositories[index].id,
                                   name: state.repositories[index].name,
-                                ));
+                              repositories: state.repositories,
+                                ),);
                           },
-                          child: state.isFavoriteRepos
+                          child: state.favoritesFromCurrentListId.contains(state.repositories[index].id)
                               ? const IconStar()
                               : const IconNotFavoriteStar()),
                     );
@@ -144,7 +145,57 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ],
         );
-      } else {
+      }
+      if (state is ToggleSearchCardState) {
+        return Column(
+          children: [
+            const Divider(height: 1, thickness: 1, color: Palette.layer1),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SearchBarWidget(
+                      trailing: SvgPicture.asset(
+                        'asset/icons/Close.svg',
+                      ),
+                    ),
+                  ),
+                  Text(
+                    searchResultHeader,
+                    style: FontStyles.headerMainAccent,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: state.repositories.length,
+                  itemBuilder: (context, index) {
+                    return SearchCard(
+                      name: state.repositories[index].name,
+                      trailing: GestureDetector(
+                          onTap: () {
+                            context
+                                .read<SearchScreenBloc>()
+                                .add(ToggleFavoriteRepos(
+                              id: state.repositories[index].id,
+                              name: state.repositories[index].name,
+                              repositories: state.repositories,
+                            ),);
+                          },
+                          child: state.favoritesFromCurrentListId.contains(state.repositories[index].id)
+                              ? const IconStar()
+                              : const IconNotFavoriteStar()),
+                    );
+                  }),
+            ),
+          ],
+        );
+      }
+      else {
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),
@@ -182,3 +233,4 @@ class _SearchScreenState extends State<SearchScreen> {
     });
   }
 }
+

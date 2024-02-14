@@ -8,7 +8,6 @@ import 'package:lead_do_it_test/widgets/search_card.dart';
 
 import '../../../constants.dart';
 import '../../../style/palette.dart';
-import '../../../widgets/icon_not_favor_star.dart';
 import '../../../widgets/icon_star.dart';
 
 class FavoriteScreenView extends StatelessWidget {

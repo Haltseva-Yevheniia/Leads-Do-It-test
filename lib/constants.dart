@@ -5,7 +5,7 @@ const String pathURL = 'search/repositories';
 const int searchResultsOutput = 15;
 const Map<String, String> headers = {
   'Accept': 'application/vnd.github+json',
-  'Authorization': 'Bearer myToken',
+  'Authorization': 'Bearer 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',
 };
 
 // TEXTS
