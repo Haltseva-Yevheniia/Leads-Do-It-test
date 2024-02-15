@@ -1,13 +1,13 @@
 // API service
-/// MY TOKEN I send it additionally or you can use yours
+/// MYTOKEN I send it additionally or you can use yours
 
-const String myToken = '';
+//const String myToken = '';
 const String baseURL = 'api.github.com';
 const String pathURL = 'search/repositories';
 const int searchResultsOutput = 15;
 const Map<String, String> headers = {
   'Accept': 'application/vnd.github+json',
-  'Authorization': 'Bearer $myToken',
+  'Authorization': 'Bearer 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',
 };
 
 // TEXTS
