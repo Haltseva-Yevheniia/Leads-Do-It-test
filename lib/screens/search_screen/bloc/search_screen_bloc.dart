@@ -37,12 +37,15 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
 
   Future<void> _onFetchedRepos(
       FetchReposEvent event, Emitter<SearchScreenState> emit) async {
+    if (state ==  SearchScreenInitialState) {
+
+
     emit(SearchScreenLoadingState());
     try {
       localSearchHistory.addHistory(event.name);
       localSearchHistory.saveHistory();
       List<RepositoryModel> repositories =
-          await serviceApi.fetchRepositories(name: event.name);
+          await serviceApi.fetchRepositories(name: event.name, page: event.page, );
       final favouriteRepos = await _localFavoriteDataBase.fetchFavoriteRepos();
       List<int> currentListId = repositories.map((repos) => repos.id).toList();
       List<int?> favoriteListId =
@@ -55,7 +58,27 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
     } catch (_) {
       emit(SearchScreenFailure());
     }
-  }
+  }  else if (state == FetchReposSuccessState) {
+      emit(SearchScreenLoadingState());
+      try {
+        int nextPage = event.page!~/30+1;
+        localSearchHistory.addHistory(event.name);
+        localSearchHistory.saveHistory();
+        List<RepositoryModel> repositories =
+        await serviceApi.fetchRepositories(name: event.name, page: nextPage, );
+        final favouriteRepos = await _localFavoriteDataBase.fetchFavoriteRepos();
+        List<int> currentListId = repositories.map((repos) => repos.id).toList();
+        List<int?> favoriteListId =
+        favouriteRepos.map((favRepos) => favRepos.id).toList();
+        List<int> favoritesFromCurrentListId =
+        currentListId.where((id) => favoriteListId.contains(id)).toList();
+        emit(FetchReposSuccessState(
+            favoritesFromCurrentListId: favoritesFromCurrentListId,
+            repositories: repositories));
+      } catch (_) {
+        emit(SearchScreenFailure());
+      }
+  }}
 
   Future<void> _onToggleFavoriteRepos(
       ToggleFavoriteRepos event, Emitter<SearchScreenState> emit) async {

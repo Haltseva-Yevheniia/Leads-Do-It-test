@@ -7,10 +7,10 @@ import 'package:lead_do_it_test/models/repository_model.dart';
 
 class ServiceApi {
   Future<List<RepositoryModel>> fetchRepositories(
-      {required String name}) async {
+      {required String name, int? page = 1}) async {
     Uri url = Uri.https(baseURL, pathURL, {
       'q': name,
-      'per_page': '$searchResultsOutput',
+      'page': page,
     });
     final response = await http.get(url, headers: headers);
 

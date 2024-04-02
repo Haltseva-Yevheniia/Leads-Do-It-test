@@ -17,6 +17,21 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+
+  final _scrollController = ScrollController();
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
+  
+  void _onScroll () {
+    if (_isBottom) {context.read<SearchScreenBloc>().add(FetchReposEvent(name: name))}
+  }
+  
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SearchScreenBloc, SearchScreenState>(
@@ -93,6 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ]);
       }
       if (state is FetchReposSuccessState) {
+        //TODO eventFetchRepos when scroll to down part of page
         return Column(
           children: [
             const Divider(height: 1, thickness: 1, color: Palette.layer1),
@@ -118,6 +134,7 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
             Expanded(
               child: ListView.builder(
+
                   itemCount: state.repositories.length,
                   itemBuilder: (context, index) {
                     return SearchCard(

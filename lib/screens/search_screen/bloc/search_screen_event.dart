@@ -13,8 +13,9 @@ final class SearchScreenInitialEvent extends SearchScreenEvent {}
 
 final class FetchReposEvent extends SearchScreenEvent {
   final String name;
+  final int? page;
 
-  const FetchReposEvent({required this.name});
+  const FetchReposEvent({required this.name, this.page});
 }
 
 final class ToggleFavoriteRepos extends SearchScreenEvent {
