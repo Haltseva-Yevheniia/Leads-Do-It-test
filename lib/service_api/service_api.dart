@@ -11,6 +11,7 @@ class ServiceApi {
     Uri url = Uri.https(baseURL, pathURL, {
       'q': name,
       'page': page,
+      'per_page': '$searchResultsOutput',
     });
     final response = await http.get(url, headers: headers);
 

@@ -33,8 +33,10 @@ final class ReadySearchState extends SearchScreenState {}
 final class FetchReposSuccessState extends SearchScreenState {
   final List<RepositoryModel> repositories;
   final List<int> favoritesFromCurrentListId;
+  final String requestName;
 
   const FetchReposSuccessState({
+    required this.requestName,
     this.repositories = const <RepositoryModel>[],
     this.favoritesFromCurrentListId = const <int>[],
   });

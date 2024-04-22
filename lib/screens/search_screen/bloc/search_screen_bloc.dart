@@ -37,7 +37,7 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
 
   Future<void> _onFetchedRepos(
       FetchReposEvent event, Emitter<SearchScreenState> emit) async {
-    if (state ==  SearchScreenInitialState) {
+    if (state is  SearchScreenInitialState) {
 
 
     emit(SearchScreenLoadingState());
@@ -53,15 +53,16 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
       List<int> favoritesFromCurrentListId =
           currentListId.where((id) => favoriteListId.contains(id)).toList();
       emit(FetchReposSuccessState(
+        requestName: event.name,
           favoritesFromCurrentListId: favoritesFromCurrentListId,
           repositories: repositories));
     } catch (_) {
       emit(SearchScreenFailure());
     }
-  }  else if (state == FetchReposSuccessState) {
+  }  else if (state is FetchReposSuccessState) {
       emit(SearchScreenLoadingState());
       try {
-        int nextPage = event.page!~/30+1;
+        int nextPage = event.page!~/15+1;
         localSearchHistory.addHistory(event.name);
         localSearchHistory.saveHistory();
         List<RepositoryModel> repositories =
@@ -73,6 +74,7 @@ class SearchScreenBloc extends Bloc<SearchScreenEvent, SearchScreenState> {
         List<int> favoritesFromCurrentListId =
         currentListId.where((id) => favoriteListId.contains(id)).toList();
         emit(FetchReposSuccessState(
+            requestName: event.name,
             favoritesFromCurrentListId: favoritesFromCurrentListId,
             repositories: repositories));
       } catch (_) {

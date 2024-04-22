@@ -27,10 +27,10 @@ class _SearchScreenState extends State<SearchScreen> {
     return currentScroll >= (maxScroll * 0.9);
   }
   
-  void _onScroll () {
-    if (_isBottom) {context.read<SearchScreenBloc>().add(FetchReposEvent(name: name))}
+  void _onScroll (String name) {
+    if (_isBottom) {context.read<SearchScreenBloc>().add(FetchReposEvent(name: name));}
   }
-  
+
 
   @override
   Widget build(BuildContext context) {
@@ -108,6 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ]);
       }
       if (state is FetchReposSuccessState) {
+        _scrollController.addListener(() {_onScroll(state.requestName); });
         //TODO eventFetchRepos when scroll to down part of page
         return Column(
           children: [
