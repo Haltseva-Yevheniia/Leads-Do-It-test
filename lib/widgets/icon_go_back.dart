@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lead_do_it_test/screens/search_screen/view/search_screen.dart';
 import 'package:lead_do_it_test/style/palette.dart';
+
+import '../screens/search_screen/view/search_screen_view.dart';
 
 class IconGoBack extends StatelessWidget {
   const IconGoBack({super.key});
@@ -9,7 +12,8 @@ class IconGoBack extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pop(context);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SearchScreenView()));
+
       },
       child: Container(
         height: 44,
